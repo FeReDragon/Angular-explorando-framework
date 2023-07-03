@@ -1,24 +1,29 @@
 <div class="d-flex justify-content-center">
     <div class="col-lg-7">
-      <table class="table table-striped table-hover text-center">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Valor</th>
-            <th>Destino</th>
-          </tr>
+      <table class="table table-striped table-hover text-center"> 
+        <thead class="tabela__cabecalho">
+          <th class="tabela__cabecalho__conteudo">Data</th>
+          <th class="tabela__cabecalho__conteudo">Valor</th>
+          <th class="tabela__cabecalho__conteudo">Destino</th>
         </thead>
-        <tbody>
-          <tr *ngFor="let transferencia of transferencias"> 
-            <td>{{transferencia?.data | date:'dd MMM yyyy HH:mm:ss'}}</td>
-            <td>{{transferencia?.valor}}</td>
-            <td>{{transferencia?.destino}}</td>
-          </tr>
-        </tbody>
+<!-- Verifica se transferencias está definido e tem comprimento maior que zero -->
+<tbody *ngIf="transferencias?.length! > 0; else listaVazia">
+  <!-- Itera sobre as transferencias -->
+  <tr class="tabela__linha" *ngFor="let transferencia of transferencias">
+    <td class="tabela__conteudo">{{transferencia.data | date: 'short'}}</td>
+    <td class="tabela__conteudo">{{transferencia.valor}}</td>
+    <td class="tabela__conteudo">{{transferencia.destino}}</td>
+  </tr>
+</tbody>
+
+        
       </table>
-    </div>
-  </div>
-  
+      
+      <ng-template #listaVazia>
+        <p>Nenhuma operação cadastrada</p>
+      
+      </ng-template>
+       
 
 
 
